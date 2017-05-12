@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<%= render partial: "shared/header" %>
+    <div class="row" style="margin: 20px;">
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="col-md-12">
+            <div class="col-md-4">
+              <%= image_tag "#{@system_user.avatar_url if @system_user.avatar?}", class: "img-circle", style: "width:140px; height: 140px;" %>
+            </div>
+            <div class="col-md-8">
+              <h2><%= link_to @system_user.username, edit_system_user_path(@system_user) %></h2>
+              <span class="text-muted"><%= @system_user.email %></span>
+              <p>last_sign_in: <%= @system_user.current_sign_in_at %></p>
+            </div>
+            </div>
+            <div class="col-md-12">
+              <%= @system_user.signature %>
+              <p class="text-right">
+                <%= link_to("Change Pwd", edit_system_user_registration_path, :class => "btn btn-default") %>
+                <%= link_to("Create Travel", new_travel_path, :class => "btn btn-default") %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<%= form_for(@travel) do |f|%>
+	<div class="row">
+	  <div class="col-md-8 col-md-offset-2" style="margin-top: 20px;">
+			<div class="panel panel-default">
+	      <div class="panel-body">
+		      <% if @travel.errors.any? %>
+				    <div id="error_explanation">
+				      <h2>
+				        <%= pluralize(@travel.errors.count, "error") %> prohibited
+				        this travel from being saved:
+				      </h2>
+				      <ul>
+				        <% @travel.errors.full_messages.each do |msg| %>
+				          <li><%= msg %></li>
+				        <% end %>
+				      </ul>
+				    </div>
+				  <% end %>
+					<div class="form-group">
+						<%= f.hidden_field :system_user_id, value: current_system_user.id %>
+			      <%= f.label :title, "title:" %>
+			      <%= f.text_field :title, class: 'form-control', required: true %>
+			    </div>
+			    <div class="form-group">
+			      <%= f.label :cover, "cover:" %>
+			      <%= f.file_field :cover %>
+			    </div>
+			    <div class="form-group">
+			      <%= f.label :description, "description:" %>
+			      <%= f.text_area :description, class: 'form-control', size: "100", required: true %>
+			    </div>
+			    <div class="form-group">
+			      <%= f.label :content, "content:" %>
+			      <%= f.bootsy_area :content, class: 'form-control', rows: "20" %>
+			    </div>
+			    <div class="form-group text-right">
+		    		<%= f.submit "Publish", class: "btn btn-primary" %>
+		    	</div>
+	    	</div>
+    	</div>
+		</div>
+	</div>
+<% end %>

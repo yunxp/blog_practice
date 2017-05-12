@@ -1,0 +1,32 @@
+<div class="panel-group" id="accordion" aria-multiselectable="true">
+  <% @travels.each do |travel|%>
+  <div class="panel panel-default">
+    <div class="panel-heading" id="<%="heading#{travel.id}"%>">
+      <h5 class="mb-0">
+        <a data-toggle="collapse" data-parent="#accordion" href="<%="#collapse#{travel.id}"%>" aria-expanded="true" aria-controls="<%="collapse#{travel.id}"%>">
+          <%= travel.title %>
+        </a>
+        <small class="pull-right"><%= travel.system_user.username %>/<%= travel.created_at %></small>
+      </h5>
+    </div>
+
+    <div id="<%="collapse#{travel.id}"%>" class="collapse" role="tabpanel" aria-labelledby="<%="heading#{travel.id}"%>">
+      <div class="panel-body">
+        <p class="text-info"><em><%= travel.description %></em><p>
+        <p class="text-right">
+          <%= link_to("Detail", travel_path(travel), :class => "btn btn-default") %>
+          <%= link_to("Edit", edit_travel_path(travel), :class => "btn btn-default") %>
+          <%= link_to 'Destroy', travel_path(travel),
+              class: "btn btn-default",
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <hr/>
+  <div class="text-right" style="margin-right: 50px;">
+    <%= will_paginate @travels, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

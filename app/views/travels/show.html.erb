@@ -1,0 +1,24 @@
+<header class="intro-header" style="background-image: url(<%=@travel.cover? ? @travel.cover_url : "images/sheep_lake1.jpg" %>)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1><%= @travel.title %></h1>
+          <h2 class="subheading"><em><%= @travel.description %></em></h2>
+          <span class="meta">Posted by <a href="#"><u><%= @travel.system_user.username %></u></a> on <%= @travel.created_at %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <%= @travel.content.html_safe %>
+      </div>
+    </div>
+  </div>
+</article>

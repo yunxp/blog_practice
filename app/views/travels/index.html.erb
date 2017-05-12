@@ -1,0 +1,33 @@
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url(<%= asset_path('banner/running.jpg') %>)">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1 class="text-right"><em>Let's go...</em></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+    <% @travels.each_with_index do |travel, index| %>
+      <div class="col-md-4">
+        <div class="text-center">
+        <%= image_tag "#{travel.cover_url if travel.cover?}", style: "width:350px; height: 190px;" %>
+        <h2><%= travel.title %></h2>
+        </div>
+        <p class="text-muted"><em><%= travel.description %></em></p>
+        <p><%= link_to("View details »", travel_path(travel), :class => "btn btn-default") %></p>
+      </div><!-- /.col-md-4 -->
+      <% if (index+1)%3 == 0 %><div class="col-md-12"><hr/></div><% end %>
+    <% end %>
+    </div>
+    <div class="text-center">
+      <%= will_paginate @travels, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+</div>

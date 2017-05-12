@@ -1,0 +1,114 @@
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+    <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="item active">
+      <%= image_tag 'banner/1.jpg' %>
+      <div class="container">
+        <div class="carousel-caption">
+          <span>
+          <h1>On the Road.</h1>
+          <p>Life is not just drifting along, life also has the poem and the distant view...</p>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag 'banner/2.jpg' %>
+      <div class="container">
+        <div class="carousel-caption">
+          <span class="pull-right text-left">
+          <h1>Voices of the Mountains.</h1>
+          <p>To me a mountain seems to stand for silence;</p>
+          <p>ranges rear up like great waves in the distance yet remain quiet as cold clouds;</p>
+          <p>ordinary barren summits open hungry lips heavenward...</p>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag 'banner/3.jpg' %>
+      <div class="container">
+        <div class="carousel-caption text-right">
+          <span class="text-left">
+          <h1>Footprints in the Sand.</h1>
+          <p>He dreamt he was walking with the Lord. Across the sky flashed scenes of his life.</p>
+          <p>For each scene, he noticed two sets of footprints in the sand; one belonged to him, and the other to the Lord..</p>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div><!-- /.carousel -->
+
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+  <!-- Three columns of text below the carousel -->
+  <div class="row">
+    <% @system_users.each do |system_user| %>
+      <div class="col-lg-3">
+        <div class="text-center">
+        <%= image_tag "#{system_user.avatar_url if system_user.avatar?}", class: "img-circle", style: "width:140px; height: 140px;" %>
+        <h2><%= system_user.username %></h2>
+        </div>
+        <p><%= system_user.signature %></p>
+        <p class="text-center"><%= link_to("View details »", edit_system_user_path(system_user), :class => "btn btn-default") %></p>
+      </div><!-- /.col-lg-4 -->
+    <% end %>
+  </div><!-- /.row -->
+
+  <!-- START THE FEATURETTES -->
+
+  <% @travels.each_with_index do |travel, index| %>
+    <hr class="featurette-divider">
+    <div class="row featurette">
+      <div class="col-md-6 <%="col-md-push-6" if index % 2 == 0%>">
+        <h2 class="featurette-heading">
+          <%= link_to(travel_path(travel.id)) do %>
+            <%= travel.title %><span class="text-muted">/<%= travel.created_at %></span>
+          <% end %>
+        </h2>
+        <p class="text-muted"><%= travel.description %></p>
+      </div>
+      <div class="col-md-6 <%="col-md-pull-6" if index % 2 == 0%>">
+        <%= image_tag "#{travel.cover_url if travel.cover?}", class: "featurette-image img-fluid mx-auto", style: "width:550px; height: 220px;" %>
+      </div>
+    </div>
+  <% end %>
+  <hr class="featurette-divider">
+  <p class="text-right" style="margin: 0px;"><%= link_to("More »", travels_path) %></p>
+</div><!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<style>
+  #myCarousel img{
+    min-width: 100%;
+    height: 100%;
+  }
+  .featurette-divider{
+    margin-top: 50px;
+  }
+  .marketing{
+    margin-top: 50px;
+  }
+</style>
